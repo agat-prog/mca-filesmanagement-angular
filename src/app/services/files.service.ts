@@ -2,6 +2,7 @@ import { ObserversModule } from "@angular/cdk/observers";
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { FileNewComponent } from "../file/filenew.component";
 import { FileModel } from "../models/file.model";
 import { FileItem } from "../models/fileitem.model";
 import { FileUpdatedRequest } from "../models/fileupdaterequest.model";
@@ -82,5 +83,17 @@ export class FilesService {
             .put<any>(this.URL_FILE_DETAIL
                 , fileUpdateRequest
             );   
+    }
+
+    create(fileCode : string, initialOption : number, file : File) : Observable<any[]>{
+        const body = new FormData();
+        body.set('code', fileCode);
+        body.set('initialoption', initialOption.toString());
+        body.set("file", file);
+
+        return this.httpClient        
+            .post<any>(this.URL_FILE_DETAIL
+                , body
+            );        
     }
 }

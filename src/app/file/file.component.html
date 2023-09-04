@@ -45,6 +45,7 @@
     <div class="row">
         <div class="col">
             <mat-form-field>
+                <mat-label>Initial option</mat-label>
                 <mat-select #initOptionSelectInput [(value)]="file.initOption">
                     <mat-option *ngFor="let initOptionItem of initialOptions" [value]="initOptionItem.id">
                         {{initOptionItem.description}}

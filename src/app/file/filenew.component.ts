@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { Constantes } from "../models/constantes.model";
 import { InitialOption } from "../models/initialoption.model";
 import { FilesService } from "../services/files.service";
+import { NgForm } from '@angular/forms';
 
 @Component({
     selector: 'app-file-new',
@@ -15,6 +16,7 @@ import { FilesService } from "../services/files.service";
     initialOptions : InitialOption[] = [];
     initialOptionSelected : InitialOption = new InitialOption();
     fileCode : string;
+    file : File;
 
     constructor(private router : Router,
                 private filesService : FilesService){}
@@ -27,25 +29,26 @@ import { FilesService } from "../services/files.service";
         console.log("event--> " + event);
         console.log(event.constructor.name);
 
-        const file : File = event.target.files[0];
-
-        if (file) {
-            console.log("nombre file --> " + file.name);
-            
-            /*
-            this.fileName = file.name;
-
-            const formData = new FormData();
-
-            formData.append("thumbnail", file);
-
-            const upload$ = this.http.post("/api/thumbnail-upload", formData);
-
-            upload$.subscribe();
-            */
+        this.file = event.target.files[0];
+    }
+    
+    onSubmitEvent() {
+      console.log("fileCode --> " + this.fileCode);
+        if (this.file && this.fileCode) {
+          console.log("nombre file --> " + this.file.name);
+          console.log("id --> " + this.initialOptionSelected.id);
+          
+          this.filesService.create(this.fileCode, this.initialOptionSelected.id, this.file)
+            .subscribe({
+              next : (response : any) => console.log(response),       
+              error : (ee : HttpErrorResponse) => {
+                console.error(ee);
+                console.error ("status -->" + ee.status)
+              }
+            });
         }
     }
-
+    
     private loadInitialOptions(){
         if (this.initialOptions.length == 0){
           this.filesService.listInitialoptions().subscribe({

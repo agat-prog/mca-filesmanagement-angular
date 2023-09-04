@@ -1,26 +1,55 @@
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <mat-form-field>
-                <mat-label>Code</mat-label>
-                <input matInput [(ngModel)]="fileCode">
-            </mat-form-field> 
+    <form class="item" #f="ngForm" (ngSubmit)="f.form.valid && onSubmitEvent()">
+        <div class="row">
+            <div class="col">
+                <div class="box">   
+                    <a mat-stroked-button [routerLink]="['/files-list']">
+                        <button mat-fab color="primary">
+                            <mat-icon>keyboard_backspace</mat-icon>
+                        </button>  
+                    </a>
 
-            <mat-form-field>
-                <mat-select [(value)]="initialOptionSelected">
-                    <mat-option *ngFor="let initOptionItem of initialOptions" [value]="initOptionItem.id">
-                        {{initOptionItem.description}}
-                    </mat-option>
-                </mat-select>                
-            </mat-form-field> 
-            
-            <input type="file" class="file-input"
-                (change)="onFileSelected($event)" #fileUpload>
-            
-            <button mat-mini-fab color="primary" class="upload-btn"
-                (click)="fileUpload.click()">
-              <mat-icon>attach_file</mat-icon>
-            </button>                        
+                    <button mat-fab color="primary" type="submit">
+                        <mat-icon>save</mat-icon>
+                    </button>                  
+                </div>
+            </div>
         </div>
-    </div>
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Code</mat-label>
+                    <input name="fileCode" matInput [(ngModel)]="fileCode" required>
+                </mat-form-field> 
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">    
+                <mat-form-field>
+                    <mat-label>Initial option</mat-label>
+                    <mat-select [(value)]="initialOptionSelected">
+                        <mat-option *ngFor="let initOptionItem of initialOptions" [value]="initOptionItem">
+                            {{initOptionItem.description}}
+                        </mat-option>
+                    </mat-select>                
+                </mat-form-field> 
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">              
+                <input type="file" class="file-input"
+                    (change)="onFileSelected($event)" #fileUpload required>
+                
+                <button mat-mini-fab color="primary" class="upload-btn"
+                    (click)="fileUpload.click()">
+                <mat-icon>attach_file</mat-icon>
+                </button> 
+                
+                <p>{{ file != null ? file.name : ''}}</p>
+            </div>
+        </div>
+    </form>
 </div>
