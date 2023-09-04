@@ -1,0 +1,16 @@
+<div class = "box">
+    <form class="item" #f="ngForm" (ngSubmit)="f.form.valid && login(f)">
+        <div>
+            <mat-form-field>
+                <mat-label>Usuario</mat-label>
+                <input name="usuario" matInput [type]="'text'" ngModel required size="20">
+            </mat-form-field>  
+
+            <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input name="password" matInput [type]="'password'" ngModel required size="15">
+            </mat-form-field>  
+        </div>
+        <button type="submit">Aceptar</button>
+    </form>
+</div>

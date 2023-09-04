@@ -1,0 +1,15 @@
+{
+    "/oauth/*": {
+        "target": "https://files-tfm-pre-agat-prog.cloud.okteto.net",
+        "secure": false,
+        "changeOrigin": true
+    },
+    "/api/*": {
+        "target": "https://files-tfm-pre-agat-prog.cloud.okteto.net",
+        "secure": false,
+        "changeOrigin": true
+    },    
+    "changeOrigin": true,
+    "logLevel": "debug"
+}
+  

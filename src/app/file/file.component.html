@@ -1,0 +1,152 @@
+<mat-spinner [diameter]="50" *ngIf="spinnerService.visibility | async"></mat-spinner>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="box">   
+                <a mat-stroked-button [routerLink]="['/files-list']">
+                    <button mat-fab color="primary">
+                        <mat-icon>keyboard_backspace</mat-icon>
+                    </button>  
+                </a>
+
+                <button mat-fab color="primary"
+                    (click)="onSaveEvent()">
+                    <mat-icon>save</mat-icon>
+                </button>  
+
+                <button mat-fab color="primary" 
+                    aria-label="Example icon button with a delete icon"
+                    [disabled]="!phaseSelected.code"
+                    (click)="onChangePhaseEvent(phaseSelected)">
+                    <mat-icon>compare_arrows</mat-icon>
+                </button>                 
+            </div>            
+        </div>
+    </div>    
+    <div class="row">
+        <div class="col">
+            <mat-form-field>
+                <mat-label>Code</mat-label>
+                <input matInput [(ngModel)]="file.code" readonly>
+            </mat-form-field>    
+
+            <mat-form-field>
+                <mat-label>Date</mat-label>
+                <input matInput [(ngModel)]="file.date" readonly>
+            </mat-form-field>    	
+
+            <mat-form-field>
+                <mat-label>User</mat-label>
+                <input matInput [(ngModel)]="file.userNameCompleted" readonly>
+            </mat-form-field>    	
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <mat-form-field>
+                <mat-select #initOptionSelectInput [(value)]="file.initOption">
+                    <mat-option *ngFor="let initOptionItem of initialOptions" [value]="initOptionItem.id">
+                        {{initOptionItem.description}}
+                    </mat-option>
+                </mat-select>                
+            </mat-form-field>               
+        </div>
+    </div>  
+    
+    <div class="row">
+        <div class="col">   	
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <textarea matInput [(ngModel)]="file.description"></textarea>
+            </mat-form-field>               
+        </div>
+
+        <div class="col">  
+            <mat-form-field>
+                <mat-label>Change phase</mat-label>
+                <mat-select #phaseSelectInput [(value)]="phaseSelected">
+                    <mat-option *ngFor="let phaseItem of availablePhases" [value]="phaseItem">
+                        {{phaseItem.description}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+             
+        </div>    
+    </div>      
+
+    <div class="row">
+        <div class="col">
+            <div class="input-group field-tittle">
+                <p class="lead">
+                    <b>Phases</b>
+                </p>
+            </div>
+
+            <table mat-table [dataSource]="file.phases" class="mat-elevation-z8">
+                <ng-container matColumnDef="phase">
+                <th mat-header-cell *matHeaderCellDef> Phase </th>
+                <td mat-cell *matCellDef="let element"> {{element.phaseDescription}} </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef> Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="userNameCompleted">
+                <th mat-header-cell *matHeaderCellDef> Creation user </th>
+                <td mat-cell *matCellDef="let element"> {{element.userNameCompleted}} </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="dateFinished">
+                <th mat-header-cell *matHeaderCellDef> Date finished </th>
+                <td mat-cell *matCellDef="let element"> {{element.dateFinished}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="userFinishedCompleted">
+                    <th mat-header-cell *matHeaderCellDef> Finished by </th>
+                    <td mat-cell *matCellDef="let element"> {{element.userFinishedCompleted}} </td>
+                </ng-container>     
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="input-group field-tittle">
+                <p class="lead">
+                    <b>Documents</b>
+                </p>
+            </div>
+
+            <table mat-table [dataSource]="file.documents" class="mat-elevation-z8">
+                <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let elementDoc"> {{elementDoc.name}} </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="creationDate">
+                <th mat-header-cell *matHeaderCellDef> Date </th>
+                <td mat-cell *matCellDef="let elementDoc"> {{elementDoc.creationDate}} </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="creationUser">
+                <th mat-header-cell *matHeaderCellDef> Creation user </th>
+                <td mat-cell *matCellDef="let elementDoc"> {{elementDoc.creationUser}} </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="updateDate">
+                <th mat-header-cell *matHeaderCellDef> Date updated </th>
+                <td mat-cell *matCellDef="let elementDoc"> {{elementDoc.updateDate}} </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsDocuments"></tr>
+                <tr mat-row *matRowDef="let rowDoc; columns: displayedColumnsDocuments;"></tr>
+            </table>
+        </div>
+    </div>
+</div>

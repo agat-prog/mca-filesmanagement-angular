@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <mat-form-field>
+                <mat-label>Code</mat-label>
+                <input matInput [(ngModel)]="fileCode">
+            </mat-form-field> 
+
+            <mat-form-field>
+                <mat-select [(value)]="initialOptionSelected">
+                    <mat-option *ngFor="let initOptionItem of initialOptions" [value]="initOptionItem.id">
+                        {{initOptionItem.description}}
+                    </mat-option>
+                </mat-select>                
+            </mat-form-field> 
+            
+            <input type="file" class="file-input"
+                (change)="onFileSelected($event)" #fileUpload>
+            
+            <button mat-mini-fab color="primary" class="upload-btn"
+                (click)="fileUpload.click()">
+              <mat-icon>attach_file</mat-icon>
+            </button>                        
+        </div>
+    </div>
+</div>
