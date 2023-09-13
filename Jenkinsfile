@@ -10,6 +10,9 @@ properties(
         )
     ]
 )
+tools {
+    nodejs "node"
+}
 node {
     stage('NPM Install') {
         withEnv(["NPM_CONFIG_LOGLEVEL=warn"]) {
