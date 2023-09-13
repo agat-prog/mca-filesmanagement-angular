@@ -21,10 +21,10 @@ pipeline {
                 sh 'npm run build'
             }
         }
-        stage('Deploy') {
+        stage('Build docker image') {
             steps {
                 //milestone()
-                echo "Deploying..."
+                sh 'docker build -t agatalba/tfm-mca-filemanagement-angular:1.0.0  .'
             }
         }
     }
