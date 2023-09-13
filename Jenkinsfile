@@ -28,8 +28,10 @@ pipeline {
         }
         stage('Push docker image') {
             steps {
-                sh 'docker push agatalba/tfm-mca-filemanagement-angular:1.0.0'
-            }            
+            	withCredentials([usernamePassword(credentialsId: 'dockerhub-user', passwordVariable: 'pass', usernameVariable: 'user')]) {
+            		sh 'docker push agatalba/tfm-mca-filemanagement-angular:1.0.0'
+            	}            
+            }
         }        
     }
 }
