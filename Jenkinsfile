@@ -1,4 +1,10 @@
 pipeline {
+    environment {
+        NAMESPACE = "agat-prog"
+        DEPLOY = "true"
+        REGISTRY = 'agatalba/tfm-mca-filemanagement-angular'
+    }
+
     options {
         buildDiscarder(logRotator(numToKeepStr: "2"))
         disableConcurrentBuilds()  
@@ -33,6 +39,20 @@ pipeline {
                     sh 'docker push agatalba/tfm-mca-filemanagement-angular:1.0.0'
             	}            
             }
-        }        
+        } 
+        stage('Deploy into Kubernetes') {
+            when {
+                environment name: 'DEPLOY', value: 'true'
+            }          
+            agent {
+                docker {
+                    image 'dtzar/helm-kubectl'
+                    args  '-u root -v /home/agat/.kube:/root/.kube'
+                }
+            }  
+            steps {
+                sh "helm upgrade -n ${NAMESPACE} -f helm/values.yaml --set namespace=${NAMESPACE} --set image.tag='1.0.0' angular-release helm/"
+            }
+        }                 
     }
 }
