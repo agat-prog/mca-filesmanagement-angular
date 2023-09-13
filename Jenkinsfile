@@ -23,9 +23,11 @@ pipeline {
         }
         stage('Build docker image') {
             steps {
-                //milestone()
                 sh 'docker build -t agatalba/tfm-mca-filemanagement-angular:1.0.0  .'
             }
+            steps {
+                sh 'docker push agatalba/tfm-mca-filemanagement-angular:1.0.0'
+            }            
         }
     }
 }
