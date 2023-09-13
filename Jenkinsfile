@@ -29,7 +29,8 @@ pipeline {
         stage('Push docker image') {
             steps {
             	withCredentials([usernamePassword(credentialsId: 'dockerhub-user', passwordVariable: 'pass', usernameVariable: 'user')]) {
-            		sh 'docker push agatalba/tfm-mca-filemanagement-angular:1.0.0'
+            		sh 'docker login -u ${user} -p ${pass}'
+                    sh 'docker push agatalba/tfm-mca-filemanagement-angular:1.0.0'
             	}            
             }
         }        
