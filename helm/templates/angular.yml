@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: angular
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: angular
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: angular
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: angular
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+          - containerPort: {{ .Values.service.port }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: angular-service
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: angular
+    release: {{ .Release.Name }}      
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: angular
+  ports:
+  - name: angular-port
+    port: {{ .Values.service.port }}

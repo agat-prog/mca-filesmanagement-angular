@@ -1,0 +1,3 @@
+{{/*
+ANGULAR FRONT
+*/}}
