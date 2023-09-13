@@ -18,7 +18,7 @@ pipeline {
         stage('Build') {
             steps {
                 //milestone()
-                sh 'ng build'
+                sh 'npm run build'
             }
         }
         stage('Deploy') {
