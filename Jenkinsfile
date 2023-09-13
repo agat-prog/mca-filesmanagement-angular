@@ -17,13 +17,13 @@ pipeline {
         }
         stage('Build') {
             steps {
-                milestone()
+                //milestone()
                 sh 'ng build'
             }
         }
         stage('Deploy') {
             steps {
-                milestone()
+                //milestone()
                 echo "Deploying..."
             }
         }
