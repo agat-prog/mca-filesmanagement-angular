@@ -9,19 +9,23 @@ pipeline {
     }
     stages {
         stage('NPM Install') {
-            withEnv(["NPM_CONFIG_LOGLEVEL=warn"]) {
-                sh 'npm install'
+            steps {
+                withEnv(["NPM_CONFIG_LOGLEVEL=warn"]) {
+                    sh 'npm install'
+                }
             }
         }
-
         stage('Build') {
-            milestone()
-            sh 'ng build'
+            steps {
+                milestone()
+                sh 'ng build'
+            }
         }
-
         stage('Deploy') {
-            milestone()
-            echo "Deploying..."
+            steps {
+                milestone()
+                echo "Deploying..."
+            }
         }
     }
 }
