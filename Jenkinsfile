@@ -1,19 +1,12 @@
-properties(
-    [
-        [$class: 'BuildDiscarderProperty', strategy:
-          [$class: 'LogRotator', artifactDaysToKeepStr: '3', artifactNumToKeepStr: '5', daysToKeepStr: '30', numToKeepStr: '60']],
-        pipelineTriggers(
-          [
-              pollSCM('H/10 * * * *'),
-              cron('@daily'),
-          ]
-        )
-    ]
-)
+options {
+    buildDiscarder(logRotator(numToKeepStr: "2"))
+    disableConcurrentBuilds()  
+}   
+agent any
 tools {
     nodejs "node"
 }
-node {
+stages {
     stage('NPM Install') {
         withEnv(["NPM_CONFIG_LOGLEVEL=warn"]) {
             sh 'npm install'
