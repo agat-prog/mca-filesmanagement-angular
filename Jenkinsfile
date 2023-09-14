@@ -3,7 +3,7 @@ pipeline {
         NAMESPACE = "agat-prog"
         DEPLOY = "true"
         REGISTRY = 'agatalba/tfm-mca-filemanagement-angular'
-        VERSION = 1.0.1
+        VERSION = "1.0.1"
     }
 
     options {
