@@ -3,6 +3,7 @@ pipeline {
         NAMESPACE = "agat-prog"
         DEPLOY = "true"
         REGISTRY = 'agatalba/tfm-mca-filemanagement-angular'
+        VERSION = 1.0.1
     }
 
     options {
@@ -29,14 +30,14 @@ pipeline {
         }
         stage('Build docker image') {
             steps {
-                sh 'docker build -t agatalba/tfm-mca-filemanagement-angular:latest .'
+                sh 'docker build -t agatalba/tfm-mca-filemanagement-angular:${VERSION} .'
             }         
         }
         stage('Push docker image') {
             steps {
             	withCredentials([usernamePassword(credentialsId: 'dockerhub-user', passwordVariable: 'pass', usernameVariable: 'user')]) {
             		sh 'docker login -u ${user} -p ${pass}'
-                    sh 'docker push agatalba/tfm-mca-filemanagement-angular:latest'
+                    sh 'docker push agatalba/tfm-mca-filemanagement-angular:${VERSION}'
             	}            
             }
         } 
@@ -51,7 +52,7 @@ pipeline {
                 }
             }  
             steps {
-                sh "helm upgrade -n ${NAMESPACE} -f helm/values.yaml --set namespace=${NAMESPACE} --set image.tag='latest' angular-release helm/"
+                sh "helm upgrade -n ${NAMESPACE} -f helm/values.yaml --set namespace=${NAMESPACE} --set image.tag='${VERSION}' angular-release helm/"
             }
         }                 
     }
