@@ -29,14 +29,14 @@ pipeline {
         }
         stage('Build docker image') {
             steps {
-                sh 'docker build -t agatalba/tfm-mca-filemanagement-angular:1.0.0  .'
+                sh 'docker build -t agatalba/tfm-mca-filemanagement-angular:latest .'
             }         
         }
         stage('Push docker image') {
             steps {
             	withCredentials([usernamePassword(credentialsId: 'dockerhub-user', passwordVariable: 'pass', usernameVariable: 'user')]) {
             		sh 'docker login -u ${user} -p ${pass}'
-                    sh 'docker push agatalba/tfm-mca-filemanagement-angular:1.0.0'
+                    sh 'docker push agatalba/tfm-mca-filemanagement-angular:latest'
             	}            
             }
         } 
@@ -51,7 +51,7 @@ pipeline {
                 }
             }  
             steps {
-                sh "helm upgrade -n ${NAMESPACE} -f helm/values.yaml --set namespace=${NAMESPACE} --set image.tag='1.0.0' angular-release helm/"
+                sh "helm upgrade -n ${NAMESPACE} -f helm/values.yaml --set namespace=${NAMESPACE} --set image.tag='latest' angular-release helm/"
             }
         }                 
     }
