@@ -10,7 +10,7 @@ export class FileModel {
     phaseCode : string;
     initOption : string;
     description : string;
-    date : string;
+    date : Date;
     finished : boolean;
     documents : DocumentoModel[];
     phases : PhaseModel[];

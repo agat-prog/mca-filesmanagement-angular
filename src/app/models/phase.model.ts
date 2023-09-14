@@ -1,8 +1,8 @@
 export class PhaseModel {
     phaseCode : string;
     phaseDescription : string;
-    date : string;
-    dateFinished : string;
+    date : Date;
+    dateFinished : Date;
     user : string;
     userNameCompleted : string;
     userFinished : string;

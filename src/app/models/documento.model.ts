@@ -4,7 +4,7 @@ export class DocumentoModel {
     active : boolean;
     creationUser : string;
     updateUser : string;
-    creationDate : string;
-    updateDate : string;
+    creationDate : Date;
+    updateDate : Date;
     url : string;
 }
