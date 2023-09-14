@@ -1,4 +1,11 @@
 <div class="container">
+    <p>
+        <mat-toolbar color="primary">
+            <mat-toolbar-row>
+                <span>New file</span>
+              </mat-toolbar-row>  
+        </mat-toolbar>
+    </p>      
     <form class="item" #f="ngForm" (ngSubmit)="f.form.valid && onSubmitEvent()">
         <div class="row">
             <div class="col">

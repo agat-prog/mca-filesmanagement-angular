@@ -1,13 +1,15 @@
-<mat-spinner [diameter]="50" *ngIf="spinnerService.visibility | async"></mat-spinner>
+
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="box">   
-                <a mat-stroked-button [routerLink]="['/files-list']">
-                    <button mat-fab color="primary">
-                        <mat-icon>keyboard_backspace</mat-icon>
-                    </button>  
-                </a>
+    <p>
+        <mat-toolbar color="primary">
+            <mat-toolbar-row>
+                <span>File edit</span>
+              </mat-toolbar-row>            
+
+            <mat-toolbar-row>
+                <button mat-fab color="primary" (click)="onReturnEvent()">
+                    <mat-icon>keyboard_backspace</mat-icon>
+                </button>  
 
                 <button mat-fab color="primary"
                     (click)="onSaveEvent()"
@@ -16,14 +18,15 @@
                 </button>  
 
                 <button mat-fab color="primary" 
-                    aria-label="Example icon button with a delete icon"
-                    [disabled]="!phaseSelected.code"
-                    (click)="onChangePhaseEvent(phaseSelected)">
+                        aria-label="Example icon button with a delete icon"
+                        [disabled]="!phaseSelected.code"
+                        (click)="onChangePhaseEvent(phaseSelected)">
                     <mat-icon>compare_arrows</mat-icon>
-                </button>                 
-            </div>            
-        </div>
-    </div>    
+                </button>    
+            </mat-toolbar-row>        
+        </mat-toolbar>
+      </p>
+    
     <div class="row">
         <div class="col">
             <mat-form-field>

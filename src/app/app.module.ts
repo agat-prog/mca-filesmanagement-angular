@@ -24,6 +24,7 @@ import { SpinnerService } from './services/spinner.service';
 import { SpinnerInterceptor } from './interceptors/spinner.interceptors';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { FileNewComponent } from './file/filenew.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { FileNewComponent } from './file/filenew.component';
     MatDividerModule,
     MatSelectModule,
     MatGridListModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatToolbarModule
   ],
   providers: [
     AuthenticationService, 

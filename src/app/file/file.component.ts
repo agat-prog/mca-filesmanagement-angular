@@ -7,7 +7,6 @@ import { FileUpdatedRequest } from '../models/fileupdaterequest.model';
 import { InitialOption } from '../models/initialoption.model';
 import { PhaseItem } from '../models/phaseitem.model';
 import { FilesService } from '../services/files.service';
-import { SpinnerService } from '../services/spinner.service';
 
 @Component({
   selector: 'app-file',
@@ -26,8 +25,7 @@ export class FileComponent implements OnInit {
 
   constructor(private route : ActivatedRoute,
               private router : Router,
-              private filesService : FilesService,
-              public spinnerService: SpinnerService,){}
+              private filesService : FilesService){}
 
   ngOnInit(): void {
     const code = this.route.snapshot.params['code'];
@@ -100,4 +98,8 @@ export class FileComponent implements OnInit {
         }
       });
   }
+
+  onReturnEvent() {
+    this.router.navigate([Constantes.PATH_FILES_LIST]);
+  };
 }

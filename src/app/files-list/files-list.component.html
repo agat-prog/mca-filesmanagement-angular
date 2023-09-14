@@ -1,14 +1,19 @@
 <div class="container">
-    <div class="row">
-      <div class="col">
-        <a mat-stroked-button [routerLink]="['/files-new']">
-          <button mat-fab color="primary">
-              <mat-icon>library_add</mat-icon>
-          </button>  
-        </a>  
-      </div>
-    </div>
+  <p>
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+          <span>Files list</span>
+        </mat-toolbar-row>
 
+        <mat-toolbar-row>
+          <a mat-stroked-button [routerLink]="['/files-new']">
+            <button mat-fab color="primary">
+                <mat-icon>library_add</mat-icon>
+            </button>  
+          </a> 
+        </mat-toolbar-row>
+    </mat-toolbar>
+  </p>
     <div class="row">
         <div class="col">
             <table mat-table [dataSource]="files" class="mat-elevation-z8">
